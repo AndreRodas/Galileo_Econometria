@@ -1,0 +1,56 @@
+---
+title: "Lab 2"
+output: html_notebook
+author: "Andre Rodas"
+---
+
+Utilizando el Dplyr y el dataset de las elecciones primarias
+(primary.csv) conteste las siguientes preguntas, si es necesario
+realizar gráficas utilice ggplot2.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+
+
+
+## P1
+¿Cuantos candidatos estaban en las primarias?
+
+```{r}
+primary = read.csv("primary_results.csv")
+head(primary,10)
+```
+
+```{r}
+ 
+```
+
+
+## P2
+¿Cuantos candidatos estaban en las primarias?
+
+## P3
+¿Qué partido obtuvo la mayor cantidad de votos en Florida?
+
+## P4
+¿Qué condado de Florida es el que tiene la mayor cantidad de votantes?
+
+## P5
+En el estado de florida, que condado tuvo la mayor cantidad de votantes, ¿Qué candidato tuvo la mayor cantidad de votos y de qué partido era?
+
+## P6
+¿Cuantas personas Votaron por Hillary Clinton y cuantas por Donald Trump en estados unidos?
+
+## P6
+¿Cuál es la probabilidad de que si alguien sea republicano en florida haya votado por Jeb Bush?
+
+## P8
+Dado que una persona voto por Ted Cruz, ¿Cuál es la probabilidad que sea de California?
+
+## P9
+Dado que una persona es de Texas, ¿Cuál es la probabilidad que vote por Donald Trump?
+
+## P10
+¿Qué condado de los Estados Unidos es el que tuvo la mayor cantidad de votantes?
