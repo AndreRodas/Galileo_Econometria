@@ -1,0 +1,315 @@
+---
+title: "Tarea 1"
+output: html_notebook
+author: "Andre Rodas"
+---
+
+# Serie 1
+
+## P1
+
+¿Cómo generaría un arreglo aleatorio de 250 elementos con los
+colores primarios?
+
+
+
+```{r}
+
+sample.colores = sample(c("Azul", "Amarillo","Rojo"),250,replace=TRUE) 
+
+length(sample.colores)
+sample.colores[1:10]
+
+```
+
+## P2
+
+Dado un arreglo de 120000 elementos de números enteros entre
+40 y 70, ¿Cómo haría para obtener la desviación estándar de
+aquellos números que son mayores a 55 y menores a 64?
+
+```{r}
+
+array.element = runif(120000, min = 40, max = 70)
+sd(array.element[array.element > 55 & array.element<64])
+
+```
+
+## P3
+
+Suponga que se almacena en una variable un arreglo con todos
+los números de carnet de los estudiantes del Instituto de
+Investigación de Operaciones de la universidad en forma de
+string, los carnets tiene al inicio dos caracteres que
+identifican el año en el que la persona entró a la universidad
+por ejemplo: 19004528 hacer referencia a una persona que
+ingreso en el año 2019, 06009878 hace referencia a una persona
+que ingreso que el año 2006, ¿Cómo haría para contar la cantidad
+de alumnos por año?
+
+```{r}
+
+arr.carnet = c("19004528","06009878","06009879","06009880","07009999")
+arr.sub.carnet = substr(arr.carnet,1,2)
+#print(arr.sub.carnet)
+print(table(arr.sub.carnet))
+
+```
+
+## P4
+
+Define el vector y = (1, 3, 5, 7) utilizando la función c().
+¿Cómo lo harías con la función seq()?
+
+```{r}
+c.y = c(1, 3, 5, 7)
+print(c.y)
+seq.y = seq(1,7,2)
+print(seq.y)
+```
+
+
+## P5
+
+Si b <- list(a=1:10, c="Hola", d="XX"), escriba una expresión
+en R que devuelva todos los elementos de la lista excepto los
+elementos 4,6,6,7 del vector a.
+
+
+```{r}
+print("---Antes")
+b <- list(a=1:10, c="Hola", d="XX")
+print(b)
+
+#sin 4,5,6,7
+
+print("---Despues")
+b$a = c(1:3, 8:10)
+print(b)
+
+
+```
+
+
+
+## P6
+
+Dado los siguientes vectores, muestre el código en R necesario
+para declarar y calcular el promedio, deviación estándar,
+mediana, moda y sumatoria total para los siguientes vectores:
+
+a. x = (8, 7, 6, 5)
+b. y = (3, 3, 3, 3, 3, 3, 3, 3, 2, 2) 
+c. z = (1, 1.75, 2.5,3.25, 4)
+
+
+```{r}
+x = seq(8,5,-1)
+print(x)
+y = c(rep(3,8),rep(2,2))
+print(y)
+z = seq(1,4,0.75)
+print(z)
+```
+
+```{r}
+#R no tiene una funcion estandar para obtener la moda, se extrae la funcion de https://www.tutorialspoint.com/r/r_mean_median_mode.htm
+
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+resumen = function(x) {
+  print(x)
+  print(paste("Promedio: ", mean(x)))
+  print(paste("DesvEst: ", sd(x)))
+  print(paste("Mediana: ", median(x)))
+  print(paste("Moda: ", getmode(x)))
+  print(paste("Sumatoria: ", sum(x)))
+}
+
+resumen(x)
+resumen(y)
+resumen(z)
+```
+
+## P7
+
+Sabemos que para sumar vectores estos deben tener la misma
+longitud. Sin embargo R trabaja de manera distinta. Defina los
+vectores 
+
+x = (1, 2, 3, 4, 5, 6), y = (7, 8), z = (9, 10, 11,12). 
+
+Calcula:
+a. x + x
+b. x + y.
+c. Responda ¿Qué ha hecho R?
+
+```{r}
+
+x = c(1, 2, 3, 4, 5, 6)
+y = c(7, 8)
+
+p7.a = x + x
+print(p7.a)
+
+p7.b = x + y
+print(p7.b)
+
+```
+
+### Respuesta inciso c:
+
+El indice del vector de menor tamaño se reinicia al primer elemento para continuar operando los elementos del vector de mayor tamaño. 
+
+## P8
+
+Dada la variable string <- "Hola Mundo", escriba una instrucción
+en R que devuelva la siguiente salida:
+[[1]]
+[1] "Hola"
+[[2]]
+[1] "Mundo"
+
+```{r}
+string <- "Hola Mundo"
+string.list = strsplit(string, " ")
+print(string.list)
+string.list = string.list[[1]]
+print(string.list)
+string.list = as.list(string.list)
+print(string.list)
+#string.list = as.list()
+
+
+
+```
+
+# Serie 2
+
+```{r}
+head(info_estudiantes)
+```
+
+## P1 
+
+¿Qué tipo de dato es info_estudiantes?
+
+```{r}
+typeof(info_estudiantes)
+```
+
+### Respuesta: 
+
+Es de tipo lista. 
+
+ 
+## P2
+
+¿Cuantos elementos tiene info_estudiantes?
+
+
+```{r}
+
+print(length(info_estudiantes))
+print(lengths(info_estudiantes))
+```
+
+
+## P3
+
+¿Qué representa cada uno de los elementos de info_estudiantes?
+
+```{r}
+names(info_estudiantes)
+```
+
+
+
+## P4
+
+¿Cuál es la media de los estudiantes ingresados en el año 2019?
+
+```{r}
+df = data.frame(info_estudiantes)
+head(df,5)
+#media = mean(info_estudiantes.df$promedio)
+#print(media)
+```
+
+```{r}
+filter.p4 = substr(df$carnet,1,2) == "19"
+mean(df[filter.p4,2])
+```
+
+
+## P5
+
+¿Cuál es la suma de desviación estándar de los estudiantes que ingresaron en el año 2016 y 2018?
+
+```{r}
+filter.p5 = substr(df$carnet,1,2) == "18" | substr(df$carnet,1,2) == "19"
+sd(df[filter.p5,2])
+```
+
+
+## P6
+
+¿Cuál es el mínimo de notas de aquellos estudiantes donde su carnet termina con los números 45 a 48?
+
+```{r}
+filter.p6 = substr(df$carnet,7,8) %in% c(45:48)
+#head(df[filter.p6,],100)
+min(df[filter.p6,2])
+```
+
+## P7
+
+¿Cuál es la probabilidad de que un estudiante tipo A tenga una nota mayor a 85?
+
+```{r}
+df.tipo.a = df[df$tipo=="A",]
+mean.a = mean(df.tipo.a[,2])
+sd.a = sd(df.tipo.a[,2])
+#print(mean.a)
+#print(sd.a)
+
+#Suponiendo que tiene una distribucion normal
+pnorm(85, mean=mean.a, sd=sd.a, lower.tail = FALSE)
+```
+
+
+## P8
+
+¿Cuál es la probabilidad de que un estudiante tipo C haya ingresado en el año 2017 o 2019?
+
+```{r}
+df.tipo.c = df[df$tipo=="C",]
+filter.p8 = substr(df.tipo.c$carnet,1,2) %in% c("17","18")
+length(df.tipo.c[filter.p8,][[1]])/length(df.tipo.c[[1]])
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
