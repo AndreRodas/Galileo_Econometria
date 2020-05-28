@@ -1,0 +1,24 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Example
+
+
+```{r}
+dataTrain<-read.csv("train.csv")
+minimo<-dataTrain$median_house_value
+maximo<-dataTrain$median_house_value
+modeloX<-function(factor){
+  aleatorio<-runif(1, minimo, maximo)*factor/180
+  return(aleatorio)
+}
+dataTest<-read.csv("test.csv")
+dataTest 
+dataSalida<-data.frame(id=dataTest$id,
+                       median_house_value=modeloX(dataTest$total_rooms))
+dataSalida 
+write.csv(dataSalida, "salida.csv", row.names = FALSE)
+```
+
